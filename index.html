@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashen Surf School — Kabalana, Ahangama</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sidebar-width: 300px;
+            --sidebar-bg: #141414;
+            --main-bg: #F7F5F0; /* Warm organic sand tone */
+            --section-alt: #FFFFFF;
+            --card-bg: #EFECE6;
+            --text-main: #181818;
+            --text-muted: #626262;
+            --border-light: rgba(24, 24, 24, 0.08);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --font-heading: 'Inter', sans-serif;
+            --font-body: 'Playfair Display', serif;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            font-family: var(--font-heading);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            padding: 3.5rem 2.5rem;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            z-index: 100;
+            color: white;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .logo-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background-color: #FAFAFA;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .logo-img i {
+            font-size: 2rem;
+            color: var(--sidebar-bg);
+        }
+
+        .logo-img span {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 1.2rem;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: #FFFFFF;
+            transform: translateX(6px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .social-icons a:hover {
+            color: white;
+        }
+
+        .footer-credits {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.35);
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-credits a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            background-color: var(--main-bg);
+        }
+
+        section {
+            padding: 7rem 6rem;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--section-alt);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        p {
+            font-family: var(--font-body);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            height: 90vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.35)), 
+                        url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1600&q=85') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-banner {
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            padding: 4rem 5rem;
+            max-width: 760px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            color: var(--text-main);
+            letter-spacing: -1.5px;
+            font-family: var(--font-heading);
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--sidebar-bg);
+            color: white;
+            padding: 1.1rem 2.8rem;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ABOUT SECTION */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.8rem;
+            font-weight: 400;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.9;
+            font-size: 1.2rem;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            filter: contrast(95%);
+            box-shadow: 20px 20px 0px rgba(0,0,0,0.04);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 6rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--border-light);
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: #E8E4DC;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* LESSON PACKAGES & RENTALS SECTION */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .package-details h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .package-details p.desc {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .package-list {
+            list-style: none;
+            margin-bottom: 3rem;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .package-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            color: var(--text-main);
+            font-family: var(--font-body);
+        }
+        
+        .package-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .package-list li i {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .content-media-box {
+            width: 100%;
+            height: 480px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .content-media-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .content-media-box:hover img {
+            transform: scale(1.03);
+        }
+
+        /* REVIEWS SECTION */
+        .reviews-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem auto;
+        }
+
+        .reviews-header h2 {
+            font-size: 2.6rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+        }
+
+        .reviews-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .review-card {
+            background-color: var(--card-bg);
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--border-light);
+            transition: var(--transition-smooth);
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stars {
+            color: #C69214;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid var(--border-light);
+            padding-top: 1.5rem;
+        }
+
+        .reviewer-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--sidebar-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .reviewer-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
+        }
+
+        /* FAQS SECTION */
+        .faq-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 1rem 3.5rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            cursor: pointer;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        .faq-question i {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-answer {
+            display: none;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding-right: 2rem;
+            font-family: var(--font-body);
+        }
+
+        /* CONTACT / FOOTER BANNER */
+        #contact {
+            background-color: var(--sidebar-bg);
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+        
+        #contact h2 {
+            color: white;
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
+        
+        #contact p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 3rem auto;
+            line-height: 1.8;
+        }
+
+        #contact .btn-whatsapp {
+            background-color: white;
+            color: var(--sidebar-bg);
+        }
+        
+        #contact .btn-whatsapp:hover {
+            background-color: #E2E2E2;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 2.5rem 1.5rem;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .sidebar > div {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo-container {
+                margin-bottom: 2rem;
+            }
+            
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px 25px;
+            }
+            
+            .nav-links li {
+                margin-bottom: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+            
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .about-grid, .split-layout, .features-grid, .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            
+            .hero-banner {
+                padding: 3rem 2rem;
+                margin: 0 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="logo-container">
+                <div class="logo-img">
+                    <i class="fa-solid fa-water"></i>
+                    <span>Ashen Surf<br>School</span>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#lessons">Packages</a></li>
+                    <li><a href="#rentals">Rentals</a></li>
+                    <li><a href="#reviews">Testimonials</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="#contact">Book</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div>
+            <div class="social-icons">
+                <a href="#" aria-label="Google"><i class="fa-brands fa-google"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+
+            <div class="footer-credits">
+                <p>© 2026 Ashen Surf School</p>
+                <p style="margin-top: 4px;">Crafted by <a href="#">Maroon Frog</a></p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-banner">
+                <h1>Surf Lessons in Kabalana</h1>
+                <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.2rem; font-style: italic;">Experience the ocean with authentic local guidance in Ahangama.</p>
+                <a href="#contact" class="btn-whatsapp">
+                    Book Your Lesson <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Rooted in Kabalana’s Waves</h2>
+                    <p>Ashen Surf School is run by a local family born and raised right on the shores of Kabalana. We teach surfing with patience, uncompromised safety, and deep generational knowledge of the breaks. Whether it is your very first time standing on a board or you are looking to refine your technique, we guide you step by step.</p>
+                </div>
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80" alt="Surf instruction in Kabalana">
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Local Advantage</h3>
+                    <p>Our instructors understand Kabalana's nuances completely, giving you secure, confident, and reliable wave insight.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Patient Coaching</h3>
+                    <p>We teach with clear techniques and calm energy, making the learning curve comfortable for every skill level.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Family Atmosphere</h3>
+                    <p>Enjoy an authentic local vibe that helps you relax, connect with the ocean, and progress rapidly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON: BEGINNER -->
+        <section id="lessons">
+            <div class="split-layout">
+                <div class="package-details">
+                    <h2>Private Beginner Lesson</h2>
+                    <p class="desc">Engineered for first-timers seeking careful, personalized attention and safe, fast progression in the whitewash.</p>
+                    
+                    <ul class="package-list">
+                        <li><i class="fa-solid fa-chevron-right"></i> Private instruction (1 person) — 7,000 LKR</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Group-joined individual session — 6,000 LKR</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Couples package (2 persons) — 6,000 LKR / person</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Comprehensive sand instruction + water coaching</li>
+                    </ul>
+
+                    <a href="#contact" class="btn-whatsapp">
+                        Reserve Your Session <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+                <div class="content-media-box">
+                    <img src="https://images.unsplash.com/photo-1531722569936-825d3dd91b15?auto=format&fit=crop&w=1000&q=80" alt="Beginner surf lesson">
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON: INTERMEDIATE -->
+        <section>
+            <div class="split-layout">
+                <div class="content-media-box">
+                    <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80" alt="Intermediate surf session">
+                </div>
+                <div class="package-details">
+                    <h2>Private Intermediate Lesson</h2>
+                    <p class="desc">Tailored for progressing surfers who want strategic wave choice, sharper line selections, and dynamic style correction.</p>
+                    
+                    <ul class="package-list">
+                        <li><i class="fa-solid fa-chevron-right"></i> Private instruction (1 person) — 9,000 LKR</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Group-joined intermediate session — 7,000 LKR</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Couples package (2 persons) — 7,000 LKR / person</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Includes local transit to the prime break of the day</li>
+                    </ul>
+
+                    <a href="#contact" class="btn-whatsapp">
+                        Reserve Your Session <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- RENTALS -->
+        <section id="rentals">
+            <div class="split-layout">
+                <div>
+                    <h2 style="font-size: 2.3rem; margin-bottom: 1.5rem; font-weight: 400;">Surfboard Rentals</h2>
+                    <ul class="package-list">
+                        <li><i class="fa-solid fa-chevron-right"></i> <div><strong>Soft Tops:</strong> Buoyant and forgiving shapes tailored for effortless learning.</div></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <div><strong>Funboards:</strong> A smooth transition option for extra speed and glide.</div></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <div><strong>Shortboards:</strong> Performance-driven outlines built for responsive turns.</div></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 style="font-size: 2.3rem; margin-bottom: 1.5rem; font-weight: 400;">Rental Terms</h2>
+                    <ul class="package-list">
+                        <li><i class="fa-solid fa-chevron-right"></i> Flexible hourly and multi-day packages available</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> Custom weekly rates for extended stays</li>
+                        <li><i class="fa-solid fa-chevron-right"></i> All equipment rigorously checked daily for safety</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section id="reviews">
+            <div class="reviews-header">
+                <h2>Words From Our Surfers</h2>
+                <p>Authentic accounts from travelers who joined our family in the water.</p>
+            </div>
+
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">"I had an incredible surf stay with Ashen Surf School. Everyone was super friendly and attentive... Drona is the best surf instructor: patient, caring, and always providing the right tips."</p>
+                    </div>
+                    <div class="reviewer">
+                        <div class="reviewer-img">IC</div>
+                        <div class="reviewer-name">Inès Cibray</div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">"Ashen Surf School is amazing. I took lessons with Sangeeth, who was kind and clear. By the end of the session, I was actually catching clean waves and standing up on my own."</p>
+                    </div>
+                    <div class="reviewer">
+                        <div class="reviewer-img">UD</div>
+                        <div class="reviewer-name">Umehani Dalal</div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">"Fantastic location and coaches who genuinely care. They take away all the intimidation and make learning completely natural. Caught more waves in one hour than I expected!"</p>
+                    </div>
+                    <div class="reviewer">
+                        <div class="reviewer-img">IC</div>
+                        <div class="reviewer-name">Inès Cibray</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQS -->
+        <section id="faqs">
+            <div class="reviews-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know ahead of your session.</p>
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="faq-item">
+                    <div class="faq-question">Where do the lessons take place? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Sessions are hosted directly at Kabalana Beach. The precise meeting point coordinates and local details are confirmed via WhatsApp before you arrive.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What should I bring along? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Just your swimwear, a towel, and sun protection. We supply all surfboards, leashes, and rashguards.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are complete beginners welcome? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Absolutely. Our beginner programs are explicitly designed to support people who have never stepped foot on a surfboard before.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT / FOOTER BANNER -->
+        <section id="contact">
+            <h2>Ready to surf Kabalana?</h2>
+            <p>Connect with our local team on WhatsApp to coordinate your schedule and secure your board.</p>
+            <a href="#" class="btn-whatsapp">
+                Chat on WhatsApp <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Interactive FAQ Script -->
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.fa-chevron-down');
+                const isVisible = answer.style.display === 'block';
+                
+                // Close all
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                document.querySelectorAll('.faq-question i').forEach(i => i.style.transform = 'rotate(0deg)');
+                
+                // Toggle current
+                if (!isVisible) {
+                    answer.style.display = 'block';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
