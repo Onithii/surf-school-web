@@ -559,4 +559,8 @@ p {
     .hero h1 {
         font-size: 2.4rem;
     }
+
+    html {
+    scroll-behavior: smooth;
+    }
 }
